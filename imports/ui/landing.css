@@ -1,0 +1,36 @@
+#btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height:90px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:limegreen;
+    border-radius:15px;
+    box-shadow: 0 4px #999;
+    font-family: comic sans-serif;
+    transition: width 2s;
+    position: absolute;
+    bottom:75px;
+    padding: "50px";
+}
+
+#btn:hover {
+    cursor: pointer;
+    background-color:#404040;
+    }
+    
+      #btn:active {
+        background-color:lightgreen;
+        box-shadow: 0 7px #666;
+        transform: translateY(4px);
+      }
+      
+      @media only screen and (max-width: 600px) {
+        #btn {
+          display:flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
