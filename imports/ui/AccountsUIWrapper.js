@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
 import "./need.css";
+import login from "./UX_test/login";
+import register from "./UX_test/register";
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
-import {  } from "module";
 
 export default class AccountsUIWrapper extends Component {
   componentDidMount() {
     // Use Meteor Blaze to render login buttons
-    this.view =  Blaze.render(Template.loginButtons,
+    this.view =  Blaze.render(Template.register,
       ReactDOM.findDOMNode(this.refs.container));
   }
   componentWillUnmount() {
@@ -19,9 +20,9 @@ export default class AccountsUIWrapper extends Component {
   render() {
     // Just render a placeholder container that will be filled in
     return (<div><div id = "user"><span ref="container" />
-          <div style = {{display: "flex", justifyContent: "center", alignItems:"center"}}>
+       {/*   <div style = {{display: "flex", justifyContent: "center", alignItems:"center"}}>
      <Card style={{ width: '50vw' }}>
-    <Card.Img variant="top" src="holder.jsre/100px180?text=Image cap" />
+    <Card.Img variant="top" />
     <Card.Body>
       <Card.Title>Card Title</Card.Title>
       <Card.Text>
@@ -39,7 +40,7 @@ export default class AccountsUIWrapper extends Component {
       <Card.Link href="#">Another Link</Card.Link>
     </Card.Body>
   </Card>
-  </div></div>
+  </div>*/}</div>
     
     </div>)
   }

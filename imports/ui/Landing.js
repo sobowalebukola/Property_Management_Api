@@ -15,7 +15,7 @@ export default class Landing extends Component {
           alignItems: "center"
         }}
       >
-        <h2 style = {{color: "#c0c0c0",position: "absolute", fontSize: "30px"}} >
+        <h2 style = {{color: "#c0c0c0",position: "absolute", fontSize: "30px" , marginLeft: "9px"}} >
           Welcome to <strong>PROPERTY WATCH</strong>. Click Welcome to get started!
         </h2>
 

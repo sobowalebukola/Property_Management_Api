@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withTracker } from 'meteor/react-meteor-data';
+import { withTracker} from 'meteor/react-meteor-data';
 import { Events } from "../api/events";
 
 class ListEvents extends Component {
@@ -23,6 +23,6 @@ class ListEvents extends Component {
 }
 export default withTracker(() => {
     return {
-      events: Events.find({}). fetch()
+      events:Events.find({}). fetch()
     }
   })(ListEvents);
