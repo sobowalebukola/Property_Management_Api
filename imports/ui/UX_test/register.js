@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { Accounts } from 'meteor/accounts-base';
+import { Accounts } from "meteor/accounts-base";
 import { withRouter } from "react-router-dom";
 
 const INITIAL_STATE = {
-  username:"",
+  username: "",
   email: "",
   password: "",
   password2: "",
   error: null
 };
-export  class Register extends Component {
+export class Register extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
@@ -20,27 +20,56 @@ export  class Register extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault();
-    Accounts.createUser({email: this.state.email, password: this.state.password, username: this.state.username }, (err) => {
-      if(err){
-        this.setState({
-          error: err.reason
-        });
-        console.log(this.state.error);
-      } else {
-        this.props.history.push("/login");
-        console.log("Successfully registered")
+    Accounts.createUser(
+      {
+        email: this.state.email,
+        password: this.state.password,
+        username: this.state.username
+      },
+      err => {
+        if (err) {
+          this.setState({
+            error: err.reason
+          });
+        } else {
+          this.props.history.push("/login");
+          console.log("Successfully registered");
+        }
       }
-    });
+    );
   }
   render() {
-    const { email, password, password2, username } = this.state;
+    const { email, password, password2, username, error } = this.state;
 
-    const isInvalid = password !== password2 || password === "" || email === ""|| username === "";
+    const isInvalid =
+      password !== password2 ||
+      password === "" ||
+      email === "" ||
+      username === "";
 
     return (
       <div>
+        {error ? (
+          <div
+            style={{
+              width: "80%",
+              height: "80%",
+              margin: "0 auto",
+              marginBottom: "50px",
+              borderRadius: "40px",
+              display: "flex",
+              backgroundColor: "sandyBrown",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {error}
+          </div>
+        ) : (
+          ""
+        )}
         <form
           className="form-signup"
           style={{
@@ -94,7 +123,7 @@ export  class Register extends Component {
             style={{ marginBottom: "10px" }}
             onChange={this.onChange}
           />
-          
+
           <label htmlFor="password" className="sr-only">
             Password
           </label>
@@ -125,12 +154,14 @@ export  class Register extends Component {
             onChange={this.onChange}
           />
 
-
           <button
             type="submit"
             className="btn btn-lg btn-primary btn-block"
-            disabled = {isInvalid}
-          > Register </button>
+            disabled={isInvalid}
+          >
+            {" "}
+            Register{" "}
+          </button>
           <br />
           <p style={{ color: "#c0c0c0" }}>
             Have An Account?{" "}

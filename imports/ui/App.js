@@ -6,8 +6,11 @@ import Landing from "./Landing";
 import Login from "./Login";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { Events } from "../api/events";
+import userDisplay from "./userSession";
 
 // Create a new React Component `EventApp`
+
+
 
 const  events = (props)=>{
   handleEdit = (eventId) => {
@@ -24,6 +27,7 @@ class EventApp extends Component {
       <div>
       <Router>
           <Route exact path = "/" component = {Landing} />
+          <Route exact path = "/session" component = {userDisplay} />
           <Route exact path = "/user" component = {AccountsUIWrapper} />
           <Route path = "/registerProperty" component = {AddEvent} />
           <Route path = "/properties" component = { events} />

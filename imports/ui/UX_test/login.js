@@ -28,7 +28,7 @@ export class Login extends Component {
           error: err.reason
         });
       } else {
-        this.props.history.push("/registerProperty");
+        this.props.history.push("/session");
         console.log("successfully logged in");
       }
     });
@@ -40,7 +40,25 @@ export class Login extends Component {
 
     return (
       <div>
-        {error ? console.log(error) : ""}
+        {error ? (
+          <div
+            style={{
+              width: "80%",
+              height: "80%",
+              margin: "0 auto",
+              marginBottom: "50px",
+              borderRadius: "40px",
+              display: "flex",
+              backgroundColor: "sandyBrown",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {error}
+          </div>
+        ) : (
+          ""
+        )}
         <form
           className="form-signin"
           style={{

@@ -13,8 +13,13 @@ class AddEvent extends Component {
       date: "",
       location: ""
     };
+  
   }
-
+  componentDidMount(){
+    const field = event.target.name;
+    return this.setState({ [field]: (this.props)})
+  }
+ 
   handleChange = event => {
     const field = event.target.name;
 
@@ -23,6 +28,7 @@ class AddEvent extends Component {
       [field]: event.target.value
     });
   };
+ 
 
   handleSubmit = event => {
     event.preventDefault();
@@ -58,13 +64,14 @@ class AddEvent extends Component {
     alert("Will be Saved in a little bit :)");
     this.props.history.push("/properties");
   };
+  
+
 
   render() {
-    const { title, description, date } = this.state;
+    const { title, description, date, location } = this.state;
     const isInvalid = title === "" || description === "" || date === ""|| location ==="";
     return (
-      <div>
-        (
+      <div id = "test">
         <div className="text-center">
           <img
             style={{
@@ -104,6 +111,8 @@ class AddEvent extends Component {
                 onChange={this.handleChange}
               />
             </div>
+            <div className="form-group">
+              <label>Location:</label>
             <input
                 type="text"
                 className="form-control"
@@ -112,6 +121,7 @@ class AddEvent extends Component {
                 value={this.state.location}
                 onChange={this.handleChange}
               />
+              </div>
             <div className="form-group">
               <label>Record Date:</label>
               <input
@@ -132,7 +142,7 @@ class AddEvent extends Component {
             </button>
           </form>
         </div>
-      </div>
+        </div>
     );
   }
 }

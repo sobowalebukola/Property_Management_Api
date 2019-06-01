@@ -34,3 +34,49 @@
           align-items: center;
         }
       }
+
+      nav a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 30px;
+        margin-top: 100px;
+      }
+div.container a
+{
+    background-color: #c0c0c0;
+    text-decoration: none;
+    font: 18px comic-sans;
+    margin: 0 10px;
+    position: relative;
+    z-index: 0;
+    cursor: pointer;
+}
+
+.pullUpDown .icon {
+  display: none;
+}
+.pullUpDown.responsive a {
+  float: none;
+  display: block;
+  text-align: left;
+}
+
+
+@media screen and (max-width: 600px) {
+  .pullUpDown a:not(:first-child) {display: none;}
+  .container a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pullUpDown {position: relative;}
+  .pullUpDown .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

@@ -3,10 +3,13 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../api/events";
 import "./listEvents.css";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+
 class ListEvents extends Component {
-  handleDelete = (eventId) => {
+  handleDelete = (eventId, callback) => {
     // onDelete we just remove the event from the db
     Events.remove({_id: eventId});
+    return callback();
   }
 
   handleEdit = (eventId) => {
@@ -16,7 +19,6 @@ class ListEvents extends Component {
   }
 
   render() {
-    
     return (
       <div>
         <h1 style = {{paddingTop: "30px", paddingBottom: "18px"}}>PROPERTIES OWNED </h1>
@@ -40,6 +42,7 @@ class ListEvents extends Component {
           {this.props.events.length ? (
             this.props.events.map(event => (
               <tbody>
+                {console.log(event)}
                 <tr>
                   <td key={event._id}>{event.description}
                   <br />
@@ -59,7 +62,10 @@ class ListEvents extends Component {
                   data-target="#myModal"
                   type="button"
                   style = {{width: '50px', fontSize: "10px", margin: "0 auto", marginTop: "10px"}}
-                  onClick={() => this.handleEdit(event._id)}
+                  onClick={() => this.handleDelete(event._id, this.props.history.push({
+                    pathname: '/registerProperty',
+                    state: { ...event}
+                  }) /*this.props.history.push("/registerProperty")*/)}
                 >
                   Edit
                 </button>
@@ -91,4 +97,4 @@ export default withTracker(() => {
   return {
     events: Events.find({}).fetch()
   };
-})(ListEvents);
+})(withRouter(ListEvents));

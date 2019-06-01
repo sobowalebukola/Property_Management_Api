@@ -3,10 +3,21 @@ import "./landing.css";
 import { Link } from "react-router-dom";
 
 export default class Landing extends Component {
+  myFunction() {
+    console.log("pressed");
+    var x = document.getElementsByClassName("container");
+    if (x.className === "pullUpDown") {
+      x += "responsive";
+    } else {
+      x = "container";
+    }
+  }
   render() {
+    
     return (
+     
       <div>
-        <div
+              <div
           style={{
             width: "100vw",
             height: "100vh",
@@ -32,7 +43,7 @@ export default class Landing extends Component {
               to="/user"
               style={{ textDecoration: "none", color: "limegreen" }}
             >
-               WELCOME
+              WELCOME
             </Link>
           </h6>
         </div>
