@@ -1,28 +1,94 @@
-import React, { Component } from 'react';
-import { withTracker} from 'meteor/react-meteor-data';
+import React, { Component } from "react";
+import { withTracker } from "meteor/react-meteor-data";
 import { Events } from "../api/events";
-
+import "./listEvents.css";
+import { Link } from "react-router-dom";
 class ListEvents extends Component {
+  handleDelete = (eventId) => {
+    // onDelete we just remove the event from the db
+    Events.remove({_id: eventId});
+  }
+
+  handleEdit = (eventId) => {
+    // onEdit we want to have the form on AddEvents populate the fields and allow for editing
+    // so we pass the eventId to the parent component so that it tells AddEvent component what data is to be displayed
+    this.props.handleEdit(eventId);
+  }
+
   render() {
+    
     return (
-      <div style = {{display: "flex", height: "100vh", justifyContent: "space-evenly", alignItems: "center", flexDirection: "column" }}>
-        {this.props.events.length ? this.props.events.map((event) => (
-          <div className="list-group" key={event._id} style={{ margin: "20px 100px"}}>
-            <div className="list-group-item list-group-item-action flex-column align-items-start">
-              <div className="d-flex w-100 justify-content-between">
-                <h5 className="mb-1">{event.title}</h5>
-                <h6>Property</h6>
-              </div>
-              <p className="mb-1">{event.description}</p>
-            </div>
-          </div>
-        )) : <div className="no-events">OOOPSY: NO EVENTS REGISTERED</div>}
+      <div>
+        <h1 style = {{paddingTop: "30px", paddingBottom: "18px"}}>PROPERTIES OWNED </h1>
+        <table className="container">
+          <thead>
+            <tr>
+              <th>
+                <h1>Property Description</h1>
+              </th>
+              <th>
+                <h1>Date Created</h1>
+              </th>
+              <th>
+                <h1>Location</h1>
+              </th>
+              <th>
+                <h1>Owner</h1>
+              </th>
+            </tr>
+          </thead>
+          {this.props.events.length ? (
+            this.props.events.map(event => (
+              <tbody>
+                <tr>
+                  <td key={event._id}>{event.description}
+                  <br />
+                  <button
+                  className="btn btn-outline-warning col"
+                  style = {{width: '50px', fontSize: "10px", margin: "0 auto", marginTop: "10px", marginRight: "3px"}}
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  type="button"
+                  onClick={() => this.handleDelete(event._id)}
+                >
+                  Delete
+                </button>
+                <button
+                  className="btn btn-outline-warning col"
+                  data-toggle="modal"
+                  data-target="#myModal"
+                  type="button"
+                  style = {{width: '50px', fontSize: "10px", margin: "0 auto", marginTop: "10px"}}
+                  onClick={() => this.handleEdit(event._id)}
+                >
+                  Edit
+                </button>
+                   </td> 
+                  <td key={event._id}>{event.date}</td>
+                  <td key={event._id}>{event.location}</td>
+                  <td key={event._id}>{event.user}</td>
+                </tr>
+              </tbody>
+            ))
+          ) : (
+            <tbody>
+              <tr>
+                <td className="no-events">OOOPS: NO PROPERTY REGISTERED</td>
+              </tr>
+              <tr>
+                <td className="no-events"> <Link to = "/registerProperty" style = {{textDecoration : "none"}}>Add Property</Link></td>
+              </tr>
+            </tbody>
+          )}
+        </table>
+          
       </div>
     );
   }
 }
+
 export default withTracker(() => {
-    return {
-      events:Events.find({}). fetch()
-    }
-  })(ListEvents);
+  return {
+    events: Events.find({}).fetch()
+  };
+})(ListEvents);

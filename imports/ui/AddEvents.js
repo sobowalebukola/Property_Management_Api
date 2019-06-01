@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Events } from "../api/events";
-
+import { withRouter } from "react-router-dom";
+import "./UX_test/login.css";
 
 class AddEvent extends Component {
   constructor(props) {
@@ -10,59 +11,80 @@ class AddEvent extends Component {
       title: "",
       description: "",
       date: "",
-      propertyPictures:""
-    }
+      location: ""
+    };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     const field = event.target.name;
-
 
     // we use square braces around the key `field` coz its a variable (we are setting state with a dynamic key name)
     this.setState({
       [field]: event.target.value
-    })
-  }
+    });
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    const { title, description, date, propertyPictures } = this.state;
+    const { title, description, date, location } = this.state;
 
     Events.insert({
+      user: Meteor.user().username,
+      title,
+      description,
+      date,
+      location
+    });
+    Events.update(event._id, {
+      $set: {
         title,
         description,
         date,
-        propertyPictures
-      });
+        location
+      }
+    });
 
-      // clears input fields onSubmit
-      this.setState({
-        user: "",
-        title: "",
-        description: "",
-        date: ""
-      })
+
+    // clears input fields onSubmit
+    this.setState({
+      user: "",
+      title: "",
+      description: "",
+      date: "",
+      location:""
+    });
     // TODO: Create backend Meteor methods to save created events
-    alert("Will be Saved in a little bit :)")
-  }
+
+    alert("Will be Saved in a little bit :)");
+    this.props.history.push("/properties");
+  };
 
   render() {
+    const { title, description, date } = this.state;
+    const isInvalid = title === "" || description === "" || date === ""|| location ==="";
     return (
       <div>
+        (
         <div className="text-center">
-          <h4 style ={{fontFamily: "cursive"}}>Property Watch</h4>
+          <img
+            style={{
+              width: "70px",
+              height: "70px",
+              borderRadius: "35px",
+              marginBottom: "15px",
+              marginTop: "15px"
+            }}
+            src="home.png"
+          />
         </div>
-        <hr />
-
-        <div className="jumbotron" style={{ margin: "0 250px" }}>
+        <div className="jumbotron" style={{ margin: "0 15%" }}>
           <form onSubmit={this.handleSubmit}>
-
             <div className="form-group">
               <label>Title:</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter event title"
+                placeholder="Enter Property name"
                 name="title"
                 value={this.state.title}
                 onChange={this.handleChange}
@@ -71,20 +93,29 @@ class AddEvent extends Component {
 
             <div className="form-group">
               <label>Description:</label>
-              <input
+              <textarea
+                rows="4"
+                columns="50"
                 type="text"
                 className="form-control"
-                placeholder="Enter event description"
+                placeholder="Enter description of property"
                 name="description"
                 value={this.state.description}
                 onChange={this.handleChange}
               />
             </div>
-
-            <div className="form-group">
-              <label>Event Date:</label>
-              <input
+            <input
                 type="text"
+                className="form-control"
+                placeholder="Enter location"
+                name="location"
+                value={this.state.location}
+                onChange={this.handleChange}
+              />
+            <div className="form-group">
+              <label>Record Date:</label>
+              <input
+                type="date"
                 className="form-control"
                 placeholder="Enter date in the format mm.dd.yyyy"
                 name="date"
@@ -92,18 +123,13 @@ class AddEvent extends Component {
                 onChange={this.handleChange}
               />
             </div>
-            <div className="form-group">
-              <label>Property Pictures:</label>
-              <input
-                type="file"
-                className="form-control"
-                name="propertyPictures"
-                value={this.state.propertyPictures}
-                onChange={this.handleChange}
-                multiple
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">Add Event</button>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={isInvalid}
+            >
+              Add Property
+            </button>
           </form>
         </div>
       </div>
@@ -111,4 +137,4 @@ class AddEvent extends Component {
   }
 }
 
-export default AddEvent;
+export default withRouter(AddEvent);
