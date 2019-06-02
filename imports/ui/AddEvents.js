@@ -15,10 +15,6 @@ class AddEvent extends Component {
     };
   
   }
-  componentDidMount(){
-    const field = event.target.name;
-    return this.setState({ [field]: (this.props)})
-  }
  
   handleChange = event => {
     const field = event.target.name;
@@ -85,7 +81,7 @@ class AddEvent extends Component {
           />
         </div>
         <div className="jumbotron" style={{ margin: "0 15%" }}>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={()=>this.handleSubmit}>
             <div className="form-group">
               <label>Title:</label>
               <input

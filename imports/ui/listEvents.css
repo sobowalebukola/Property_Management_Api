@@ -104,3 +104,12 @@ body {
   .container td:nth-child(4),
   .container th:nth-child(4) { display: none; }
   }
+
+ a {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  a:hover{
+    cursor: pointer;
+  } 
