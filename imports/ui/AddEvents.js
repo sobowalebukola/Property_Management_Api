@@ -81,7 +81,7 @@ class AddEvent extends Component {
           />
         </div>
         <div className="jumbotron" style={{ margin: "0 15%" }}>
-          <form onSubmit={()=>this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label>Title:</label>
               <input
@@ -101,7 +101,7 @@ class AddEvent extends Component {
                 columns="50"
                 type="text"
                 className="form-control"
-                placeholder="Enter description of property"
+                placeholder="Enter short description of property"
                 name="description"
                 value={this.state.description}
                 onChange={this.handleChange}

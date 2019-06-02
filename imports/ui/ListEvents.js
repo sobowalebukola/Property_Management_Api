@@ -101,7 +101,7 @@ class ListEvents extends Component {
               </tr>
 
               <a
-                class="btn btn-info btn-lg"
+                className="btn btn-info btn-lg"
                 onClick={() => this.props.history.push("./registerProperty")}
                 style={{ position: "absolute",
                   bottom: "10px",
@@ -119,6 +119,21 @@ class ListEvents extends Component {
             </tbody>
           )}
         </table>
+        <a
+               className="btn btn-info btn-lg"
+               onClick={() => this.props.history.push("./registerProperty")}
+               style={{ position: "absolute",
+                 bottom: "10px",
+                 right: "10px"}}
+             >
+               <span
+                 class="glyphicon glyphicon-plus"
+                 style={{ fontSize: "32px" }}
+                 title="Add new Property"
+               >
+                 +
+               </span>
+             </a>
       </div>
     );
   }
