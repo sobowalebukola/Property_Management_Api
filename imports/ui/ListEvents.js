@@ -103,7 +103,9 @@ class ListEvents extends Component {
               <a
                 class="btn btn-info btn-lg"
                 onClick={() => this.props.history.push("./registerProperty")}
-                style={{}}
+                style={{ position: "absolute",
+                  bottom: "10px",
+                  right: "10px"}}
               >
                 <span
                   class="glyphicon glyphicon-plus"

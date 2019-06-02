@@ -105,11 +105,11 @@ body {
   .container th:nth-child(4) { display: none; }
   }
 
- a {
+ /*a {
     position: absolute;
     bottom: 10px;
     right: 10px;
-  }
+  }*/
   a:hover{
     cursor: pointer;
   } 
