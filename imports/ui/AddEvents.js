@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Events } from "../api/events";
 import { withRouter } from "react-router-dom";
+import swal from "sweetalert";
 import "./UX_test/login.css";
 
 class AddEvent extends Component {
@@ -57,7 +58,7 @@ class AddEvent extends Component {
     });
     // TODO: Create backend Meteor methods to save created events
 
-    alert("Will be Saved in a little bit :)");
+    swal("This property is being archived 👍🏼");
     this.props.history.push("/properties");
   };
   

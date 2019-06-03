@@ -127,7 +127,7 @@ class ListEvents extends Component {
                  right: "10px"}}
              >
                <span
-                 class="glyphicon glyphicon-plus"
+                 className="glyphicon glyphicon-plus"
                  style={{ fontSize: "32px" }}
                  title="Add new Property"
                >
